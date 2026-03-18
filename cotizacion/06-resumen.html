@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resumen - Cotización Accidentes Personales</title>
+  <link rel="stylesheet" href="../../estilos-demo.css">
+  <style>
+    /* Estilos del Resumen AP - mismo estilo que vehiculo/05-resumen.html (tono azul #0d47a1) */
+    .resumen-card .card-header {
+      background: #0d47a1;
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .resumen-section-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #0d47a1;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #0d47a1;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .resumen-kv-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      background: #fff;
+    }
+    .resumen-kv-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1.25rem;
+      min-height: 48px;
+      background: #fff;
+    }
+    .resumen-kv-label {
+      font-size: 0.875rem;
+      color: #616161;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+    .resumen-kv-label svg {
+      width: 18px;
+      height: 18px;
+      color: #0d47a1;
+      opacity: 0.85;
+    }
+    .resumen-kv-value {
+      font-size: 0.95rem;
+      color: #212121;
+      font-weight: 600;
+      text-align: right;
+      word-break: break-word;
+    }
+    .resumen-asegurados-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      font-size: 0.95rem;
+    }
+    .resumen-asegurados-table thead th {
+      background: #0d47a1;
+      color: white;
+      font-weight: 600;
+      padding: 0.9rem 1rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    .resumen-asegurados-table thead th:nth-child(3),
+    .resumen-asegurados-table thead th:nth-child(4),
+    .resumen-asegurados-table thead th:nth-child(5),
+    .resumen-asegurados-table tbody td:nth-child(3),
+    .resumen-asegurados-table tbody td:nth-child(4),
+    .resumen-asegurados-table tbody td:nth-child(5) {
+      text-align: center;
+    }
+    .resumen-asegurados-table tbody td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e0e0e0;
+      color: #212121;
+    }
+    .resumen-asegurados-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .resumen-asegurados-table tbody tr:nth-child(even) {
+      background: #fafafa;
+    }
+    /* Grid de planes - Coberturas Calculadas (como vehiculo) */
+    .resumen-planes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .resumen-plan-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      background: #fff;
+    }
+    .resumen-plan-header {
+      padding: 1rem 1.25rem;
+      background: #f8fbff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .resumen-plan-nombre {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0d47a1;
+      margin-bottom: 0.35rem;
+    }
+    .resumen-plan-prima {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #212121;
+    }
+    .resumen-plan-ver-btn {
+      display: block;
+      width: 100%;
+      padding: 0.6rem 1rem;
+      margin: 0;
+      border: none;
+      background: #0d47a1;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .resumen-plan-ver-btn:hover {
+      background: #002171;
+    }
+    .resumen-plan-detalle {
+      border-top: 1px solid #e0e0e0;
+    }
+    .resumen-plan-detalle summary {
+      list-style: none;
+      cursor: pointer;
+    }
+    .resumen-plan-detalle summary::-webkit-details-marker {
+      display: none;
+    }
+    .resumen-plan-detalle summary.resumen-plan-ver-btn {
+      user-select: none;
+    }
+    .resumen-plan-detalle .resumen-coberturas-table {
+      margin: 1rem;
+    }
+    .resumen-coberturas-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      font-size: 0.95rem;
+    }
+    .resumen-coberturas-table thead th {
+      background: #0d47a1;
+      color: white;
+      font-weight: 600;
+      padding: 0.9rem 1rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    .resumen-coberturas-table thead th:nth-child(2),
+    .resumen-coberturas-table thead th:nth-child(3),
+    .resumen-coberturas-table tbody td:nth-child(2),
+    .resumen-coberturas-table tbody td:nth-child(3) {
+      text-align: right;
+    }
+    .resumen-coberturas-table tbody td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e0e0e0;
+      color: #212121;
+    }
+    .resumen-coberturas-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .resumen-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      border: 1px solid rgba(13, 71, 161, 0.2);
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(13, 71, 161, 0.08);
+    }
+    .resumen-total-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0d47a1;
+    }
+    .resumen-total-value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0d47a1;
+      letter-spacing: 0.5px;
+    }
+    @media (max-width: 600px) {
+      .resumen-kv-list {
+        grid-template-columns: 1fr;
+      }
+      .resumen-asegurados-table {
+        font-size: 0.85rem;
+      }
+      .resumen-asegurados-table thead th,
+      .resumen-asegurados-table tbody td {
+        padding: 0.5rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-wrap">
+    <header class="flow-header">
+      <h1>Cotización Accidentes Personales</h1>
+      <p>Paso 4: Resumen de la Cotización</p>
+    </header>
+
+    <div class="stepper">
+      <div class="step done"><span class="step-num">✓</span><span class="step-label">Búsqueda</span></div>
+      <span class="step-connector"></span>
+      <div class="step done"><span class="step-num">✓</span><span class="step-label">Contratante</span></div>
+      <span class="step-connector"></span>
+      <div class="step done"><span class="step-num">✓</span><span class="step-label">Grupo Familiar</span></div>
+      <span class="step-connector"></span>
+      <div class="step active"><span class="step-num">4</span><span class="step-label">Resumen</span></div>
+    </div>
+
+    <div class="card resumen-card">
+      <div class="card-header">Resumen de la Cotización</div>
+      <div class="card-body">
+        <!-- Contratante -->
+        <div class="form-section" style="margin-bottom: 1.75rem;">
+          <div class="resumen-section-title">Contratante</div>
+          <div class="resumen-kv-list">
+            <div class="resumen-kv-item">
+              <span class="resumen-kv-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Titular</span>
+              <span class="resumen-kv-value">V-12345678 - Juan Pérez</span>
+            </div>
+            <div class="resumen-kv-item">
+              <span class="resumen-kv-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</span>
+              <span class="resumen-kv-value">juan.perez@correo.com</span>
+            </div>
+            <div class="resumen-kv-item">
+              <span class="resumen-kv-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>Teléfono</span>
+              <span class="resumen-kv-value">0414-1234567</span>
+            </div>
+            <div class="resumen-kv-item">
+              <span class="resumen-kv-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>Dirección</span>
+              <span class="resumen-kv-value">Av. Principal, Caracas</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Asegurados -->
+        <div class="form-section" style="margin-bottom: 1.75rem;">
+          <div class="resumen-section-title">Asegurados (3 personas: 1 titular + 2 adicionales)</div>
+          <table class="resumen-asegurados-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Cédula</th>
+                <th>Edad</th>
+                <th>Relación</th>
+                <th>Prima</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Juan Pérez</td>
+                <td>V-12345678</td>
+                <td>35</td>
+                <td>Titular</td>
+                <td>Bs. 120,00</td>
+              </tr>
+              <tr>
+                <td>María Pérez</td>
+                <td>V-23456789</td>
+                <td>32</td>
+                <td>Cónyuge</td>
+                <td>Bs. 100,00</td>
+              </tr>
+              <tr>
+                <td>Carlos Pérez</td>
+                <td>V-34567890</td>
+                <td>8</td>
+                <td>Hijo</td>
+                <td>Bs. 100,00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Coberturas Calculadas -->
+        <div class="form-section" style="margin-bottom: 1.75rem;">
+          <div class="resumen-section-title">Planes para ti</div>
+          <div class="resumen-planes-grid">
+            <div class="resumen-plan-card">
+              <div class="resumen-plan-header">
+                <div class="resumen-plan-nombre">Plan Básico</div>
+                <div class="resumen-plan-prima">Bs. 280,00</div>
+              </div>
+              <details class="resumen-plan-detalle">
+                <summary class="resumen-plan-ver-btn">Ver coberturas</summary>
+                <table class="resumen-coberturas-table">
+                  <thead>
+                    <tr>
+                      <th>Descripción</th>
+                      <th>Suma Asegurada</th>
+                      <th>Prima</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Muerte accidental</td><td>Bs. 40.000</td><td>Bs. 100,00</td></tr>
+                    <tr><td>Invalidez total permanente</td><td>Bs. 40.000</td><td>Bs. 90,00</td></tr>
+                    <tr><td>Gastos médicos</td><td>Bs. 5.000</td><td>Bs. 90,00</td></tr>
+                  </tbody>
+                </table>
+              </details>
+            </div>
+            <div class="resumen-plan-card">
+              <div class="resumen-plan-header">
+                <div class="resumen-plan-nombre">Plan Estándar</div>
+                <div class="resumen-plan-prima">Bs. 320,00</div>
+              </div>
+              <details class="resumen-plan-detalle">
+                <summary class="resumen-plan-ver-btn">Ver coberturas</summary>
+                <table class="resumen-coberturas-table">
+                  <thead>
+                    <tr>
+                      <th>Descripción</th>
+                      <th>Suma Asegurada</th>
+                      <th>Prima</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Muerte accidental</td><td>Bs. 50.000</td><td>Bs. 120,00</td></tr>
+                    <tr><td>Invalidez total permanente</td><td>Bs. 50.000</td><td>Bs. 110,00</td></tr>
+                    <tr><td>Gastos médicos</td><td>Bs. 8.000</td><td>Bs. 90,00</td></tr>
+                  </tbody>
+                </table>
+              </details>
+            </div>
+            <div class="resumen-plan-card">
+              <div class="resumen-plan-header">
+                <div class="resumen-plan-nombre">Plan Premium</div>
+                <div class="resumen-plan-prima">Bs. 420,00</div>
+              </div>
+              <details class="resumen-plan-detalle">
+                <summary class="resumen-plan-ver-btn">Ver coberturas</summary>
+                <table class="resumen-coberturas-table">
+                  <thead>
+                    <tr>
+                      <th>Descripción</th>
+                      <th>Suma Asegurada</th>
+                      <th>Prima</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Muerte accidental</td><td>Bs. 80.000</td><td>Bs. 180,00</td></tr>
+                    <tr><td>Invalidez total permanente</td><td>Bs. 80.000</td><td>Bs. 160,00</td></tr>
+                    <tr><td>Gastos médicos</td><td>Bs. 15.000</td><td>Bs. 80,00</td></tr>
+                  </tbody>
+                </table>
+              </details>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary">Atrás (Editar)</button>
+          <button type="button" class="btn btn-primary">Confirmar y Enviar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="04-asegurados.html" class="prev">← Asegurados</a>
+      <a href="index.html" class="next">Índice</a>
+    </div>
+  </div>
+</body>
+</html>

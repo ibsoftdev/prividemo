@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grupo Familiar - Cotización APS</title>
+  <link rel="stylesheet" href="../../estilos-demo.css">
+  <style>
+    .detail-table { width: 100%; border-collapse: collapse; margin: 1rem 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
+    .detail-table thead th { background: var(--primary); color: white; font-weight: 600; font-size: 0.9rem; padding: 0.75rem 1rem; text-align: left; }
+    .detail-table tbody td { padding: 0.75rem 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .detail-table tbody tr:last-child td { border-bottom: none; }
+    .detail-table .col-actions { width: 80px; text-align: right; }
+    .detail-table .col-actions button { background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0.25rem; }
+    .detail-table .col-actions button:hover { color: var(--primary); }
+    .detail-add-btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: var(--radius); font-size: 0.9rem; cursor: pointer; margin-bottom: 1rem; }
+    .detail-add-btn:hover { background: var(--primary-dark); }
+  </style>
+</head>
+<body>
+  <div class="app-wrap">
+    <header class="flow-header">
+      <h1>Cotización Accidentes Personales</h1>
+      <p>Paso 3: Datos de Grupo Familiar</p>
+    </header>
+
+    <div class="stepper">
+      <div class="step done"><span class="step-num">✓</span><span class="step-label">Búsqueda</span></div>
+      <span class="step-connector"></span>
+      <div class="step done"><span class="step-num">✓</span><span class="step-label">Contratante</span></div>
+      <span class="step-connector"></span>
+      <div class="step active"><span class="step-num">3</span><span class="step-label">Grupo Familiar</span></div>
+      <span class="step-connector"></span>
+      <div class="step"><span class="step-num">4</span><span class="step-label">Resumen</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Grupo Familiar</div>
+      <div class="card-body">
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label>¿Desea Agregar Otros Familiares?</label>
+          <div class="radio-group">
+            <label class="radio-option"><input type="radio" name="agregar-familiares" value="si" checked><span>Sí</span></label>
+            <label class="radio-option"><input type="radio" name="agregar-familiares" value="no"><span>No</span></label>
+          </div>
+        </div>
+        <p class="help" style="margin-bottom: 1rem;">Agregue los asegurados adicionales que desee incluir en la póliza. El contratante ya está incluido como asegurado principal.</p>
+
+        <button type="button" class="detail-add-btn">+ Agregar asegurado</button>
+
+        <table class="detail-table">
+          <thead>
+            <tr>
+              <th>Identificación</th>
+              <th>Nombre completo</th>
+              <th>Fecha nacimiento</th>
+              <th class="col-actions"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>V-23456789</td>
+              <td>María González</td>
+              <td>15/03/1990</td>
+              <td class="col-actions">
+                <button type="button" title="Editar">✎</button>
+                <button type="button" title="Eliminar">🗑</button>
+              </td>
+            </tr>
+            <tr>
+              <td>V-34567890</td>
+              <td>Pedro López</td>
+              <td>22/07/1985</td>
+              <td class="col-actions">
+                <button type="button" title="Editar">✎</button>
+                <button type="button" title="Eliminar">🗑</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary">Atrás</button>
+          <button type="button" class="btn btn-primary">Continuar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="02-contratante.html" class="prev">← Contratante</a>
+      <a href="06-resumen.html" class="next">Siguiente: Resumen →</a>
+    </div>
+  </div>
+</body>
+</html>
