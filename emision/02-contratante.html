@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Declaración Jurada - Emisión APS</title>
+  <link rel="stylesheet" href="../../estilos-demo.css">
+  <style>
+    .declaracion-section { margin-bottom: 1.75rem; }
+    .declaracion-section:last-of-type { margin-bottom: 0; }
+    .declaracion-section-title { font-size: 1rem; font-weight: 600; color: var(--primary); margin-bottom: 0.75rem; }
+    .declaracion-list { list-style: none; padding: 0; margin: 0; }
+    .declaracion-list li { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; font-size: 0.95rem; color: var(--text); }
+    .declaracion-list li:last-child { margin-bottom: 0; }
+    .declaracion-list .declaracion-check { width: 18px; height: 18px; flex-shrink: 0; border: 2px solid #00838f; border-radius: 4px; background: #fff; }
+    .declaracion-list .declaracion-check.orange { border-color: #e65100; background: #fff; }
+    .declaracion-list li.declaracion-item-with-text { align-items: flex-start; }
+    .declaracion-item-content { flex: 1; }
+    .declaracion-item-text { font-size: 0.9rem; color: var(--text); line-height: 1.5; margin-top: 0.5rem; }
+    .doc-section-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; }
+    .doc-table { width: 100%; border-collapse: collapse; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
+    .doc-table thead th { background: var(--primary); color: white; font-weight: 600; font-size: 0.95rem; padding: 0.9rem 1.25rem; text-align: left; }
+    .doc-table thead th:first-child { border-radius: var(--radius) 0 0 0; }
+    .doc-table thead th:last-child { border-radius: 0 var(--radius) 0 0; }
+    .doc-table tbody td { padding: 0.9rem 1.25rem; border-bottom: 1px solid var(--border); background: #fafafa; font-size: 0.9rem; color: var(--text); }
+    .doc-table tbody tr:last-child td { border-bottom: none; }
+    .doc-table .col-status { width: 120px; }
+    .doc-table .col-desc { }
+    .doc-table .col-file { width: 280px; }
+    .doc-file-cell { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+    .doc-filename { display: inline-flex; align-items: center; padding: 0.4rem 0.75rem; background: #e8e8e8; border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.85rem; color: var(--text-muted); max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .doc-file-actions { display: inline-flex; align-items: center; gap: 0.35rem; }
+    .doc-file-actions button, .doc-file-actions a { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: none; background: transparent; color: var(--text-muted); cursor: pointer; border-radius: 4px; transition: color 0.2s, background 0.2s; }
+    .doc-file-actions button:hover, .doc-file-actions a:hover { color: var(--primary); background: rgba(13, 71, 161, 0.08); }
+    .doc-upload-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: var(--radius); font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+    .doc-upload-btn:hover { background: var(--primary-dark); }
+    .doc-upload-btn svg { width: 18px; height: 18px; }
+    .declaracion-actions { display: flex; justify-content: flex-end; margin-top: 2rem; }
+    .declaracion-actions .btn { padding: 0.6rem 1.5rem; }
+  </style>
+</head>
+<body>
+  <div class="app-wrap">
+    <header class="flow-header">
+      <h1>Emisión Accidentes Personales</h1>
+      <p>Paso 2: Declaración Jurada</p>
+    </header>
+
+    <div class="stepper">
+      <div class="step done">
+        <span class="step-num">✓</span>
+        <span class="step-label">Búsqueda</span>
+      </div>
+      <span class="step-connector"></span>
+      <div class="step active">
+        <span class="step-num">2</span>
+        <span class="step-label">Declaración Jurada</span>
+      </div>
+      <span class="step-connector"></span>
+      <div class="step">
+        <span class="step-num">3</span>
+        <span class="step-label">Beneficiarios</span>
+      </div>
+      <span class="step-connector"></span>
+      <div class="step">
+        <span class="step-num">4</span>
+        <span class="step-label">Resumen</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Declaración Jurada</div>
+      <div class="card-body">
+        <div class="declaracion-section">
+          <h2 class="doc-section-title">Documentos</h2>
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th class="col-status">Estatus</th>
+                <th class="col-desc">Descripción</th>
+                <th class="col-file">Archivo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Pendiente</td>
+                <td>CÉDULA DE IDENTIDAD O RIF DEL TITULAR</td>
+                <td>
+                  <label class="doc-upload-btn" style="cursor:pointer;">
+                    <input type="file" accept=".pdf,.jpg,.jpeg,.png" style="display:none">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/></svg>
+                    Subir
+                  </label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="declaracion-section">
+          <div class="declaracion-section-title">Declaraciones de conformidad:</div>
+          <ul class="declaracion-list">
+            <li class="declaracion-item-with-text">
+              <span class="declaracion-check" aria-hidden="true"></span>
+              <div class="declaracion-item-content">
+                Declaración de fondos
+                <p class="declaracion-item-text">En mi carácter de TOMADOR, doy fe de que el dinero utilizado para el pago de la prima, proveniente de una fuente lícita y su origen no guarda relación alguna con capitales, bienes, haberes, valores, títulos u operaciones, producto de actividades ilícitas o que provenga de los delitos de Delincuencia Organizada u otras conductas tipificadas en la legislación venezolana.</p>
+              </div>
+            </li>
+            <li class="declaracion-item-with-text">
+              <span class="declaracion-check" aria-hidden="true"></span>
+              <div class="declaracion-item-content">
+                Declaración de buena salud
+                <p class="declaracion-item-text">Declaro que me encuentro en buen estado de salud física y mental.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="declaracion-actions">
+          <button type="button" class="btn btn-primary">Continuar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="01-consulta.html" class="prev">← Búsqueda</a>
+      <a href="04-asegurados.html" class="next">Siguiente: Beneficiarios →</a>
+    </div>
+  </div>
+</body>
+</html>

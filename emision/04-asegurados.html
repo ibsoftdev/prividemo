@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datos del Beneficiario - Emisión APS</title>
+  <link rel="stylesheet" href="../../estilos-demo.css">
+  <style>
+    .cedula-rif-group { display: flex; align-items: stretch; gap: 0; max-width: 320px; }
+    .cedula-rif-group .form-control { border-radius: 0; }
+    .cedula-rif-group select.form-control { width: 59px; min-width: 59px; border-right: none; border-top-left-radius: var(--radius, 8px); border-bottom-left-radius: var(--radius, 8px); }
+    .cedula-rif-group input.form-control { flex: 1; border-top-right-radius: var(--radius, 8px); border-bottom-right-radius: var(--radius, 8px); }
+    .cedula-rif-group .form-control:focus { z-index: 1; }
+    .radio-group { display: flex; gap: 1.5rem; align-items: center; margin-top: 0.35rem; }
+    .radio-group label { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 400; cursor: pointer; }
+    .radio-group input[type="radio"] { margin: 0; }
+    .form-group.beneficiario-datos-sep { margin-top: 1.5rem; }
+  </style>
+</head>
+<body>
+  <div class="app-wrap">
+    <header class="flow-header">
+      <h1>Emisión Accidentes Personales</h1>
+      <p>Paso 3: Datos del Beneficiario</p>
+    </header>
+
+    <div class="stepper">
+      <div class="step done">
+        <span class="step-num">✓</span>
+        <span class="step-label">Búsqueda</span>
+      </div>
+      <span class="step-connector"></span>
+      <div class="step done">
+        <span class="step-num">✓</span>
+        <span class="step-label">Declaración Jurada</span>
+      </div>
+      <span class="step-connector"></span>
+      <div class="step active">
+        <span class="step-num">3</span>
+        <span class="step-label">Beneficiario</span>
+      </div>
+      <span class="step-connector"></span>
+      <div class="step">
+        <span class="step-num">4</span>
+        <span class="step-label">Resumen</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Datos del Beneficiario</div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>¿Desea Cargar Beneficiario?</label>
+          <div class="radio-group">
+            <label><input type="radio" name="cargarBeneficiario" value="S" checked> Sí</label>
+            <label><input type="radio" name="cargarBeneficiario" value="N"> No</label>
+          </div>
+        </div>
+
+        <div class="form-group beneficiario-datos-sep">
+          <label for="BenefNumID">Cédula / R.I.F.</label>
+          <div class="cedula-rif-group">
+            <select id="BenefTipoID" class="form-control" aria-label="Tipo de identificación">
+              <option value="">--</option>
+              <option value="V">V</option>
+              <option value="E">E</option>
+              <option value="J">J</option>
+            </select>
+            <input type="text" id="BenefNumID" class="form-control" placeholder="Ej: 12345678" maxlength="9" aria-label="Número de cédula o RIF">
+          </div>
+          <span class="help">Máximo 9 dígitos</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="BenefPrimNombre">Nombre</label>
+            <input type="text" id="BenefPrimNombre" class="form-control" placeholder="Ej: Juan">
+          </div>
+          <div class="form-group">
+            <label for="BenefSegNombre">Apellido</label>
+            <input type="text" id="BenefSegNombre" class="form-control" placeholder="Opcional">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="BenefFNacimiento">F/Nacimiento</label>
+            <input type="text" id="BenefFNacimiento" class="form-control" placeholder="DD/MM/AAAA">
+          </div>
+          <div class="form-group">
+            <label for="BenefParentesco">Parentesco</label>
+            <select id="BenefParentesco" class="form-control">
+              <option value="">Seleccione --</option>
+              <option value="conyuge">Cónyuge</option>
+              <option value="hijo">Hijo(a)</option>
+              <option value="padre">Padre/Madre</option>
+              <option value="hermano">Hermano(a)</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="BenefParticipacion">% Participación</label>
+          <input type="text" id="BenefParticipacion" class="form-control" value="100" maxlength="3" style="max-width: 100px;">
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary">Cancelar</button>
+          <button type="button" class="btn btn-primary">Continuar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="02-contratante.html" class="prev">← Declaración Jurada</a>
+      <a href="06-resumen.html" class="next">Siguiente: Resumen →</a>
+    </div>
+  </div>
+</body>
+</html>

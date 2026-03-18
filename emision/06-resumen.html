@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resumen - Emisión Accidentes Personales</title>
+  <link rel="stylesheet" href="../../estilos-demo.css">
+  <style>
+    /* Estilos del Resumen AP - mismo estilo que vehiculo/05-resumen.html (tono azul #0d47a1) */
+    .resumen-card .card-header {
+      background: #0d47a1;
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .resumen-section-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #0d47a1;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #0d47a1;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .resumen-kv-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      background: #fff;
+    }
+    .resumen-kv-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1.25rem;
+      min-height: 48px;
+      background: #fff;
+    }
+    .resumen-kv-label {
+      font-size: 0.875rem;
+      color: #616161;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+    .resumen-kv-label svg {
+      width: 18px;
+      height: 18px;
+      color: #0d47a1;
+      opacity: 0.85;
+    }
+    .resumen-kv-value {
+      font-size: 0.95rem;
+      color: #212121;
+      font-weight: 600;
+      text-align: right;
+      word-break: break-word;
+    }
+    .resumen-asegurados-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      font-size: 0.95rem;
+    }
+    .resumen-asegurados-table thead th {
+      background: #0d47a1;
+      color: white;
+      font-weight: 600;
+      padding: 0.9rem 1rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    .resumen-asegurados-table thead th:nth-child(3),
+    .resumen-asegurados-table thead th:nth-child(4),
+    .resumen-asegurados-table thead th:nth-child(5),
+    .resumen-asegurados-table tbody td:nth-child(3),
+    .resumen-asegurados-table tbody td:nth-child(4),
+    .resumen-asegurados-table tbody td:nth-child(5) {
+      text-align: center;
+    }
+    .resumen-asegurados-table tbody td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e0e0e0;
+      color: #212121;
+    }
+    .resumen-asegurados-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .resumen-asegurados-table tbody tr:nth-child(even) {
+      background: #fafafa;
+    }
+    /* Grid de planes - Coberturas Calculadas (como vehiculo) */
+    .resumen-planes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+    .resumen-plan-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      background: #fff;
+    }
+    .resumen-plan-header {
+      padding: 1rem 1.25rem;
+      background: #f8fbff;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .resumen-plan-nombre {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0d47a1;
+      margin-bottom: 0.35rem;
+    }
+    .resumen-plan-prima {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #212121;
+    }
+    .resumen-plan-ver-btn {
+      display: block;
+      width: 100%;
+      padding: 0.6rem 1rem;
+      margin: 0;
+      border: none;
+      background: #0d47a1;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .resumen-plan-ver-btn:hover {
+      background: #002171;
+    }
+    .resumen-plan-detalle {
+      border-top: 1px solid #e0e0e0;
+    }
+    .resumen-plan-detalle summary {
+      list-style: none;
+      cursor: pointer;
+    }
+    .resumen-plan-detalle summary::-webkit-details-marker {
+      display: none;
+    }
+    .resumen-plan-detalle summary.resumen-plan-ver-btn {
+      user-select: none;
+    }
+    .resumen-plan-detalle .resumen-coberturas-table {
+      margin: 1rem;
+    }
+    .resumen-coberturas-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+      font-size: 0.95rem;
+    }
+    .resumen-coberturas-table thead th {
+      background: #0d47a1;
+      color: white;
+      font-weight: 600;
+      padding: 0.9rem 1rem;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    .resumen-coberturas-table thead th:nth-child(2),
+    .resumen-coberturas-table thead th:nth-child(3),
+    .resumen-coberturas-table tbody td:nth-child(2),
+    .resumen-coberturas-table tbody td:nth-child(3) {
+      text-align: right;
+    }
+    .resumen-coberturas-table tbody td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e0e0e0;
+      color: #212121;
+    }
+    .resumen-coberturas-table tbody tr:last-child td {
+      border-bottom: none;
+    }
+    .resumen-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+      border: 1px solid rgba(13, 71, 161, 0.2);
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(13, 71, 161, 0.08);
+    }
+    .resumen-total-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0d47a1;
+    }
+    .resumen-total-value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #0d47a1;
+      letter-spacing: 0.5px;
+    }
+    @media (max-width: 600px) {
+      .resumen-kv-list {
+        grid-template-columns: 1fr;
+      }
+      .resumen-asegurados-table {
+        font-size: 0.85rem;
+      }
+      .resumen-asegurados-table thead th,
+      .resumen-asegurados-table tbody td {
+        padding: 0.5rem 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-wrap">
+    <header class="flow-header">
+      <h1>Emisión Accidentes Personales</h1>
+      <p>Paso 4: Resumen de la Emisión</p>
+    </header>
+
+    <div class="stepper">
+      <div class="step done"><span class="step-num">✓</span><span class="step-label">Búsqueda</span></div>
+      <span class="step-connector"></span>
+      <div class="step done"><span class="step-num">✓</span><span class="step-label">Declaración Jurada</span></div>
+      <span class="step-connector"></span>
+      <div class="step done"><span class="step-num">✓</span><span class="step-label">Beneficiarios</span></div>
+      <span class="step-connector"></span>
+      <div class="step active"><span class="step-num">4</span><span class="step-label">Resumen</span></div>
+    </div>
+
+    <div class="card resumen-card">
+      <div class="card-header">Resumen de la Emisión</div>
+      <div class="card-body">
+        <!-- Producto (paso 01-consulta) -->
+        <div class="form-section" style="margin-bottom: 1.75rem;">
+          <div class="resumen-section-title">Producto seleccionado</div>
+          <div class="resumen-kv-list">
+            <div class="resumen-kv-item">
+              <span class="resumen-kv-label">Producto</span>
+              <span class="resumen-kv-value">Accidentes Personales</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Declaración Jurada (paso 02-contratante) -->
+        <div class="form-section" style="margin-bottom: 1.75rem;">
+          <div class="resumen-section-title">Declaración Jurada</div>
+          <div class="resumen-kv-list">
+            <div class="resumen-kv-item">
+              <span class="resumen-kv-label">Declaración de fondos</span>
+              <span class="resumen-kv-value">Aceptada</span>
+            </div>
+            <div class="resumen-kv-item">
+              <span class="resumen-kv-label">Declaración de buena salud</span>
+              <span class="resumen-kv-value">Aceptada</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Documentos (paso 02-contratante) -->
+        <div class="form-section" style="margin-bottom: 1.75rem;">
+          <div class="resumen-section-title">Documentos</div>
+          <div class="resumen-kv-list">
+            <div class="resumen-kv-item">
+              <span class="resumen-kv-label">Cédula de identidad o RIF del titular</span>
+              <span class="resumen-kv-value">cedula_001.pdf</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Beneficiario (paso 04-asegurados) -->
+        <div class="form-section" style="margin-bottom: 1.75rem;">
+          <div class="resumen-section-title">Beneficiario</div>
+          <div class="resumen-kv-list">
+            <div class="resumen-kv-item">
+              <span class="resumen-kv-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>Titular</span>
+              <span class="resumen-kv-value">V-23456789 - María González</span>
+            </div>
+            <div class="resumen-kv-item">
+              <span class="resumen-kv-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4h2v2H9v-2zm4 0h2v2h-2v-2zm4 0h2v2h-2v-2z"/></svg>F/Nacimiento</span>
+              <span class="resumen-kv-value">15/03/1990</span>
+            </div>
+            <div class="resumen-kv-item">
+              <span class="resumen-kv-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>Parentesco</span>
+              <span class="resumen-kv-value">Cónyuge</span>
+            </div>
+            <div class="resumen-kv-item">
+              <span class="resumen-kv-label"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>% Participación</span>
+              <span class="resumen-kv-value">100 %</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary">Atrás (Editar)</button>
+          <button type="button" class="btn btn-primary">Confirmar y Enviar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="04-asegurados.html" class="prev">← Beneficiarios</a>
+      <a href="index.html" class="next">Índice</a>
+    </div>
+  </div>
+</body>
+</html>

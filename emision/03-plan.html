@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datos de Plan - Cotización APS</title>
+  <link rel="stylesheet" href="../../estilos-demo.css">
+</head>
+<body>
+  <div class="app-wrap">
+    <header class="flow-header">
+      <h1>Emisión Accidentes Personales</h1>
+      <p>Paso 3: Datos de Plan</p>
+    </header>
+
+    <div class="stepper">
+      <div class="step done">
+        <span class="step-num">✓</span>
+        <span class="step-label">Búsqueda</span>
+      </div>
+      <span class="step-connector"></span>
+      <div class="step done">
+        <span class="step-num">✓</span>
+        <span class="step-label">Contratante</span>
+      </div>
+      <span class="step-connector"></span>
+      <div class="step">
+        <span class="step-num">3</span>
+        <span class="step-label">Beneficiarios</span>
+      </div>
+      <span class="step-connector"></span>
+      <div class="step">
+        <span class="step-num">4</span>
+        <span class="step-label">Resumen</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Datos de Plan</div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="Plan">Plan</label>
+            <select id="Plan" class="form-control">
+              <option value="">Seleccione --</option>
+              <option value="BASICO">Básico</option>
+              <option value="ESTANDAR">Estándar</option>
+              <option value="PREMIUM">Premium</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="SumaAsegurada">Suma Asegurada (Bs.)</label>
+            <input type="text" id="SumaAsegurada" class="form-control" placeholder="Ej: 50000">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="InicioVigencia">Inicio de vigencia</label>
+            <input type="date" id="InicioVigencia" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="FinVigencia">Fin de vigencia</label>
+            <input type="date" id="FinVigencia" class="form-control">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="CoberturasAdicionales">Coberturas adicionales</label>
+            <select id="CoberturasAdicionales" class="form-control" multiple size="4">
+              <option value="Muerte">Muerte accidental</option>
+              <option value="Invalidez">Invalidez total permanente</option>
+              <option value="Gastos">Gastos médicos</option>
+              <option value="Riesgo">Riesgos laborales</option>
+            </select>
+            <span class="help">Ctrl+clic para selección múltiple</span>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-secondary">Atrás</button>
+          <button type="button" class="btn btn-primary">Calcular y Continuar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="02-contratante.html" class="prev">← Contratante</a>
+      <a href="04-asegurados.html" class="next">Siguiente: Beneficiarios →</a>
+    </div>
+  </div>
+</body>
+</html>
