@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Búsqueda - Cotización Personas (APS)</title>
+  <link rel="stylesheet" href="../estilos-demo.css">
+  <style>
+    /* Bloque selección de producto (estilo BBVA) */
+    .provi-productos-brand { margin-bottom: 0.5rem; }
+    .provi-productos-brand .brand-bbva { font-weight: 700; font-size: 1.5rem; color: #002171; }
+    .provi-productos-brand .brand-seguros { font-size: 1.2rem; color: #616161; font-weight: 400; margin-left: 0.25rem; }
+    .provi-productos-instruction { font-size: 0.95rem; color: #212121; margin-bottom: 1.5rem; }
+    .provi-producto-item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding: 1.25rem 0; border-bottom: 1px solid #eee; }
+    .provi-producto-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .provi-producto-item:first-of-type { padding-top: 0; }
+    .provi-producto-content h3 { font-size: 1.15rem; font-weight: 700; color: #002171; margin-bottom: 0.5rem; }
+    .provi-producto-content p { font-size: 0.9rem; color: #212121; line-height: 1.5; margin: 0; }
+    .provi-producto-actions { margin-top: 0.25rem; }
+    .provi-producto-actions button { background: none; border: none; cursor: pointer; padding: 0.25rem; color: #616161; font-size: 1.25rem; line-height: 1; }
+    .provi-producto-actions button:hover { color: #002171; }
+  </style>
+</head>
+<body>
+  <div class="app-wrap">
+    <header class="flow-header">
+      <h1>Cotización Accidentes Personales</h1>
+      <p>Paso 1: Búsqueda</p>
+    </header>
 
+    <!-- Selección de producto -->
+    <div class="card">
+      <div class="card-body">
+        <section class="provi-productos" aria-labelledby="productos-heading">
+      <div class="provi-productos-brand">
+        <span class="brand-bbva">BBVA</span><span class="brand-seguros">Seguros</span>
+      </div>
+      <p class="provi-productos-instruction" id="productos-heading">Seleccione el producto que desea cotizar:</p>
+
+      <div class="provi-producto-item" data-producto="gastos-funerarios">
+        <div class="provi-producto-content">
+          <h3>Gastos Funerarios</h3>
+          <p>Ampara económicamente los trámites y gastos por concepto de la prestación de los servicios funerarios en esos momentos difíciles a consecuencia del fallecimiento del Asegurado Titular o grupo familiar.</p>
+        </div>
+        <div class="provi-producto-actions">
+          <button type="button" aria-label="Opciones Gastos Funerarios">⋮</button>
+        </div>
+      </div>
+
+      <div class="provi-producto-item" data-producto="vida-individual">
+        <div class="provi-producto-content">
+          <h3>Vida individual</h3>
+          <p>Brinda cobertura a los eventos de muerte e incapacidad total y permanente originados por cualquier causa.</p>
+        </div>
+        <div class="provi-producto-actions">
+          <button type="button" aria-label="Opciones Vida individual">⋮</button>
+        </div>
+      </div>
+
+      <div class="provi-producto-item" data-producto="accidentes-personales">
+        <div class="provi-producto-content">
+          <h3>Accidentes Personales</h3>
+          <p>Protege en caso de que sufra un accidente originado por acción fortuita, repentina y violenta, ocasionando muerte natural o accidental, incapacidad total y permanente.</p>
+        </div>
+        <div class="provi-producto-actions">
+          <button type="button" aria-label="Opciones Accidentes Personales">⋮</button>
+        </div>
+      </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="nav-links">
+      <a href="../index.html" class="prev">← Índice</a>
+      <a href="../cotizacion/02-contratante.html" class="next">Siguiente: Contratante →</a>
+    </div>
+  </div>
+</body>
+</html>
