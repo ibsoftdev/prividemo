@@ -340,6 +340,25 @@ select.form-control {
   color: var(--primary);
 }
 
+/* Ítem del índice sin enlace (misma tarjeta y alineación que .index-list a) */
+.index-list .index-entry {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-weight: 500;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+.index-list .index-entry--disabled {
+  color: var(--text-muted);
+  cursor: default;
+}
+
 .index-list .step-badge {
   width: 32px;
   height: 32px;
