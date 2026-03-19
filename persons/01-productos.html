@@ -3,9 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Búsqueda - Cotización Personas (APS)</title>
+  <title>Selección de producto - BBVA Seguros</title>
   <link rel="stylesheet" href="../estilos-demo.css">
   <style>
+    /* Encabezado de pantalla (BBVA Seguros + instrucción) */
+    .provi-productos-page-header {
+      border: 4px solid #002171;
+      border-radius: 20px;
+      background: #fff;
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.08));
+    }
+    .provi-productos-page-header .provi-productos-instruction { margin-bottom: 0; }
     /* Bloque selección de producto (estilo BBVA) */
     .provi-productos-brand { margin-bottom: 0.5rem; }
     .provi-productos-brand .brand-bbva { font-weight: 700; font-size: 1.5rem; color: #002171; }
@@ -23,49 +33,46 @@
 </head>
 <body>
   <div class="app-wrap">
-    <header class="flow-header">
-      <h1>Cotización Accidentes Personales</h1>
-      <p>Paso 1: Búsqueda</p>
-    </header>
-
-    <!-- Selección de producto -->
-    <div class="card">
-      <div class="card-body">
-        <section class="provi-productos" aria-labelledby="productos-heading">
+    <header class="provi-productos-page-header" aria-labelledby="productos-heading">
       <div class="provi-productos-brand">
         <span class="brand-bbva">BBVA</span><span class="brand-seguros">Seguros</span>
       </div>
       <p class="provi-productos-instruction" id="productos-heading">Seleccione el producto que desea cotizar:</p>
+    </header>
 
-      <div class="provi-producto-item" data-producto="gastos-funerarios">
-        <div class="provi-producto-content">
-          <h3>Gastos Funerarios</h3>
-          <p>Ampara económicamente los trámites y gastos por concepto de la prestación de los servicios funerarios en esos momentos difíciles a consecuencia del fallecimiento del Asegurado Titular o grupo familiar.</p>
-        </div>
-        <div class="provi-producto-actions">
-          <button type="button" aria-label="Opciones Gastos Funerarios">⋮</button>
-        </div>
-      </div>
+    <!-- Lista de productos -->
+    <div class="card">
+      <div class="card-body">
+        <section class="provi-productos" aria-label="Lista de productos">
+          <div class="provi-producto-item" data-producto="gastos-funerarios">
+            <div class="provi-producto-content">
+              <h3>Gastos Funerarios</h3>
+              <p>Ampara económicamente los trámites y gastos por concepto de la prestación de los servicios funerarios en esos momentos difíciles a consecuencia del fallecimiento del Asegurado Titular o grupo familiar.</p>
+            </div>
+            <div class="provi-producto-actions">
+              <button type="button" aria-label="Opciones Gastos Funerarios">⋮</button>
+            </div>
+          </div>
 
-      <div class="provi-producto-item" data-producto="vida-individual">
-        <div class="provi-producto-content">
-          <h3>Vida individual</h3>
-          <p>Brinda cobertura a los eventos de muerte e incapacidad total y permanente originados por cualquier causa.</p>
-        </div>
-        <div class="provi-producto-actions">
-          <button type="button" aria-label="Opciones Vida individual">⋮</button>
-        </div>
-      </div>
+          <div class="provi-producto-item" data-producto="vida-individual">
+            <div class="provi-producto-content">
+              <h3>Vida individual</h3>
+              <p>Brinda cobertura a los eventos de muerte e incapacidad total y permanente originados por cualquier causa.</p>
+            </div>
+            <div class="provi-producto-actions">
+              <button type="button" aria-label="Opciones Vida individual">⋮</button>
+            </div>
+          </div>
 
-      <div class="provi-producto-item" data-producto="accidentes-personales">
-        <div class="provi-producto-content">
-          <h3>Accidentes Personales</h3>
-          <p>Protege en caso de que sufra un accidente originado por acción fortuita, repentina y violenta, ocasionando muerte natural o accidental, incapacidad total y permanente.</p>
-        </div>
-        <div class="provi-producto-actions">
-          <button type="button" aria-label="Opciones Accidentes Personales">⋮</button>
-        </div>
-      </div>
+          <div class="provi-producto-item" data-producto="accidentes-personales">
+            <div class="provi-producto-content">
+              <h3>Accidentes Personales</h3>
+              <p>Protege en caso de que sufra un accidente originado por acción fortuita, repentina y violenta, ocasionando muerte natural o accidental, incapacidad total y permanente.</p>
+            </div>
+            <div class="provi-producto-actions">
+              <button type="button" aria-label="Opciones Accidentes Personales">⋮</button>
+            </div>
+          </div>
         </section>
       </div>
     </div>
