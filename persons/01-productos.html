@@ -21,11 +21,63 @@
     .provi-productos-brand .brand-bbva { font-weight: 700; font-size: 1.5rem; color: #002171; }
     .provi-productos-brand .brand-seguros { font-size: 1.2rem; color: #616161; font-weight: 400; margin-left: 0.25rem; }
     .provi-productos-instruction { font-size: 0.95rem; color: #212121; margin-bottom: 1.5rem; }
-    .provi-producto-item { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding: 1.25rem 0; border-bottom: 1px solid #eee; }
+    .provi-producto-item { display: grid; grid-template-columns: auto 1fr auto; gap: 0.75rem 1rem; align-items: start; padding: 1.25rem 0; border-bottom: 1px solid #eee; }
     .provi-producto-item:last-child { border-bottom: none; padding-bottom: 0; }
     .provi-producto-item:first-of-type { padding-top: 0; }
+    .provi-producto-radio { margin: 0; padding: 0; align-self: start; }
+    .provi-producto-radio input[type="radio"] {
+      width: 1.15rem; height: 1.15rem;
+      accent-color: #002171;
+      cursor: pointer;
+      margin-top: 0.2rem;
+    }
+    .provi-producto-content > label.provi-producto-main-label { display: block; cursor: pointer; }
     .provi-producto-content h3 { font-size: 1.15rem; font-weight: 700; color: #002171; margin-bottom: 0.5rem; }
     .provi-producto-content p { font-size: 0.9rem; color: #212121; line-height: 1.5; margin: 0; }
+    /* Planes / sumas: bloque a la derecha; checkboxes en columna alineada (misma X) */
+    .provi-producto-planes {
+      margin-top: 0.85rem;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .provi-planes-list {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.4rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      width: max-content;
+      max-width: 100%;
+    }
+    .provi-planes-list > li {
+      min-width: 0;
+      width: 100%;
+    }
+    .provi-plan-checkbox {
+      display: grid;
+      grid-template-columns: 1.15rem minmax(0, 1fr);
+      column-gap: 0.5rem;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #424242;
+      cursor: pointer;
+      text-align: left;
+      user-select: none;
+    }
+    .provi-plan-checkbox input[type="checkbox"] {
+      width: 1.05rem;
+      height: 1.05rem;
+      margin: 0;
+      justify-self: start;
+      accent-color: #002171;
+      cursor: pointer;
+    }
+    .provi-plan-checkbox span {
+      line-height: 1.35;
+      min-width: 0;
+    }
     .provi-producto-actions { margin-top: 0.25rem; }
     .provi-producto-actions button { background: none; border: none; cursor: pointer; padding: 0.25rem; color: #616161; font-size: 1.25rem; line-height: 1; }
     .provi-producto-actions button:hover { color: #002171; }
@@ -43,11 +95,38 @@
     <!-- Lista de productos -->
     <div class="card">
       <div class="card-body">
-        <section class="provi-productos" aria-label="Lista de productos">
+        <section class="provi-productos" role="radiogroup" aria-labelledby="productos-heading">
           <div class="provi-producto-item" data-producto="gastos-funerarios">
+            <div class="provi-producto-radio">
+              <input type="radio" name="producto-cotizar" id="prod-gastos-funerarios" value="gastos-funerarios">
+            </div>
             <div class="provi-producto-content">
-              <h3>Gastos Funerarios</h3>
-              <p>Ampara económicamente los trámites y gastos por concepto de la prestación de los servicios funerarios en esos momentos difíciles a consecuencia del fallecimiento del Asegurado Titular o grupo familiar.</p>
+              <label class="provi-producto-main-label" for="prod-gastos-funerarios">
+                <h3>Gastos Funerarios</h3>
+                <p>Ampara económicamente los trámites y gastos por concepto de la prestación de los servicios funerarios en esos momentos difíciles a consecuencia del fallecimiento del Asegurado Titular o grupo familiar.</p>
+              </label>
+              <div class="provi-producto-planes" role="group" aria-label="Planes y sumas aseguradas — Gastos Funerarios">
+                <ul class="provi-planes-list">
+                  <li>
+                    <label class="provi-plan-checkbox">
+                      <input type="checkbox" name="planes-gastos-funerarios" id="gf-plan-esencial" value="esencial-30000">
+                      <span>Plan Esencial — Suma asegurada $30.000</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="provi-plan-checkbox">
+                      <input type="checkbox" name="planes-gastos-funerarios" id="gf-plan-familiar" value="familiar-60000">
+                      <span>Plan Familiar — Suma asegurada $60.000</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="provi-plan-checkbox">
+                      <input type="checkbox" name="planes-gastos-funerarios" id="gf-plan-plus" value="plus-100000">
+                      <span>Plan Plus — Suma asegurada $100.000</span>
+                    </label>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="provi-producto-actions">
               <button type="button" aria-label="Opciones Gastos Funerarios">⋮</button>
@@ -55,9 +134,36 @@
           </div>
 
           <div class="provi-producto-item" data-producto="vida-individual">
+            <div class="provi-producto-radio">
+              <input type="radio" name="producto-cotizar" id="prod-vida-individual" value="vida-individual">
+            </div>
             <div class="provi-producto-content">
-              <h3>Vida individual</h3>
-              <p>Brinda cobertura a los eventos de muerte e incapacidad total y permanente originados por cualquier causa.</p>
+              <label class="provi-producto-main-label" for="prod-vida-individual">
+                <h3>Vida individual</h3>
+                <p>Brinda cobertura a los eventos de muerte e incapacidad total y permanente originados por cualquier causa.</p>
+              </label>
+              <div class="provi-producto-planes" role="group" aria-label="Planes y sumas aseguradas — Vida individual">
+                <ul class="provi-planes-list">
+                  <li>
+                    <label class="provi-plan-checkbox">
+                      <input type="checkbox" name="planes-vida-individual" id="vi-plan-100" value="vida-100000">
+                      <span>Plan Vida 100 — Suma asegurada $100.000</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="provi-plan-checkbox">
+                      <input type="checkbox" name="planes-vida-individual" id="vi-plan-250" value="vida-250000">
+                      <span>Plan Vida 250 — Suma asegurada $250.000</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="provi-plan-checkbox">
+                      <input type="checkbox" name="planes-vida-individual" id="vi-plan-500" value="vida-500000">
+                      <span>Plan Vida 500 — Suma asegurada $500.000</span>
+                    </label>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="provi-producto-actions">
               <button type="button" aria-label="Opciones Vida individual">⋮</button>
@@ -65,9 +171,36 @@
           </div>
 
           <div class="provi-producto-item" data-producto="accidentes-personales">
+            <div class="provi-producto-radio">
+              <input type="radio" name="producto-cotizar" id="prod-accidentes-personales" value="accidentes-personales">
+            </div>
             <div class="provi-producto-content">
-              <h3>Accidentes Personales</h3>
-              <p>Protege en caso de que sufra un accidente originado por acción fortuita, repentina y violenta, ocasionando muerte natural o accidental, incapacidad total y permanente.</p>
+              <label class="provi-producto-main-label" for="prod-accidentes-personales">
+                <h3>Accidentes Personales</h3>
+                <p>Protege en caso de que sufra un accidente originado por acción fortuita, repentina y violenta, ocasionando muerte natural o accidental, incapacidad total y permanente.</p>
+              </label>
+              <div class="provi-producto-planes" role="group" aria-label="Planes y sumas aseguradas — Accidentes Personales">
+                <ul class="provi-planes-list">
+                  <li>
+                    <label class="provi-plan-checkbox">
+                      <input type="checkbox" name="planes-accidentes-personales" id="ap-plan-basico" value="ap-basico-50000">
+                      <span>Plan Básico — Suma asegurada $50.000</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="provi-plan-checkbox">
+                      <input type="checkbox" name="planes-accidentes-personales" id="ap-plan-intermedio" value="ap-intermedio-150000">
+                      <span>Plan Intermedio — Suma asegurada $150.000</span>
+                    </label>
+                  </li>
+                  <li>
+                    <label class="provi-plan-checkbox">
+                      <input type="checkbox" name="planes-accidentes-personales" id="ap-plan-premium" value="ap-premium-300000">
+                      <span>Plan Premium — Suma asegurada $300.000</span>
+                    </label>
+                  </li>
+                </ul>
+              </div>
             </div>
             <div class="provi-producto-actions">
               <button type="button" aria-label="Opciones Accidentes Personales">⋮</button>
